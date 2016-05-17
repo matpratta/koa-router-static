@@ -1,4 +1,4 @@
-module.exports = function (root, router_url, opts) {
+module.exports = function (root, opts) {
   var send = require('koa-send');
   var path = require('path');
 
@@ -7,8 +7,7 @@ module.exports = function (root, router_url, opts) {
 
   root = path.resolve(root);
 
-  console.log('Static mounted on "%s"', root);
-  console.log(root, router_url);
+  if (opts.debug) console.log('Static mounted on "%s"', root);
 
   return function * (next) {
     yield next;
@@ -16,8 +15,10 @@ module.exports = function (root, router_url, opts) {
     if (this.method != 'GET' && this.method != 'HEAD') return;
     if (this.body != null || this.status != 404) return;
 
-    var requested = path.normalize(this.path).substring(router_url.length);
-    if (requested.length == 0) requested = opts.index;
+    var file = this.params['0'] || '/' + opts.index;
+
+    var requested = path.normalize(file);
+    if (requested.length == 0 || requested == '/') requested = opts.index;
 
     yield send(this, requested, { root: root });
   }
