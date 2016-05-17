@@ -1,6 +1,6 @@
 {
   "name": "koa-router-static",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Static file serving compatible with koa-router.",
   "main": "index.js",
   "repository": {
@@ -11,5 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matheus Pratta <eu@matheus.io> (http://matheus.io/)",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa-send": "^3.2.0"
+  }
 }
