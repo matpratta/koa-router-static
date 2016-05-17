@@ -1,0 +1,15 @@
+{
+  "name": "koa-router-static",
+  "version": "1.0.0",
+  "description": "Static file serving compatible with koa-router.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MatheusMK3/koa-router-static/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matheus Pratta <eu@matheus.io> (http://matheus.io/)",
+  "license": "ISC"
+}
