@@ -11,6 +11,11 @@ module.exports = function (root, router_url, opts) {
   console.log(root, router_url);
 
   return function * (next) {
+    yield next;
+
+    if (this.method != 'GET' && this.method != 'HEAD') return;
+    if (this.body != null || this.status != 404) return;
+
     var requested = path.normalize(this.path).substring(router_url.length);
     if (requested.length == 0) requested = opts.index;
 
