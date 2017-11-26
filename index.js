@@ -1,25 +1,24 @@
 module.exports = function (root, opts) {
-  var send = require('koa-send');
-  var path = require('path');
+  const send = require('koa-send');
+  const path = require('path');
 
-  var opts = opts || {};
+  opts = opts || {};
   opts.index = opts.index || 'index.html';
 
   root = path.resolve(root);
 
   if (opts.debug) console.log('Static mounted on "%s"', root);
 
-  return function * (next) {
-    yield next;
+  return async function (ctx, next) {
 
-    if (this.method != 'GET' && this.method != 'HEAD') return;
-    if (this.body != null || this.status != 404) return;
+    if (ctx.method != 'GET' && ctx.method != 'HEAD') await next();
+    if (ctx.body != null || ctx.status != 404) await next();
 
-    var file = this.params['0'] || '/' + opts.index;
+    const file = ctx.params['0'] || '/' + opts.index;
 
-    var requested = path.normalize(file);
+    const requested = path.normalize(file);
     if (requested.length == 0 || requested == '/') requested = opts.index;
 
-    yield send(this, requested, { root: root });
+    await send(ctx, requested, { root: root });
   }
 }
