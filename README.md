@@ -1,6 +1,9 @@
 # koa-router-static
 Static file serving compatible with koa-router.
 
+## WARNING
+This project is no longer maintained. It's been a long time and there are probably much better ways to do this today. Please refer to https://github.com/pkoretic/koa-static-server instead.
+
 ## Usage
 
 Simply use the middleware in your router and choose a directory. The module will already find the file you requested and serve it for you.
